@@ -29,20 +29,7 @@ function App() {
       }
     }
     // Default sample video if none found
-    return [
-      {
-        id: 1,
-        title: 'Sample Project Demo',
-        videoUrl: 'https://www.w3schools.com/html/mov_bbb.mp4',
-        likes: 12,
-        dislikes: 2,
-        comments: [
-          { id: 1, username: 'JohnDoe', text: 'Great video!', pinned: true },
-          { id: 2, username: 'JaneSmith', text: 'Very helpful, thanks!', pinned: false },
-        ],
-      },
-    ];
-  });
+   
 
   // Save videos to localStorage whenever they change
   useEffect(() => {
