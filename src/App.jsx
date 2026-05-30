@@ -23,13 +23,15 @@ function App() {
     const savedVideos = localStorage.getItem('portfolioVideos');
     if (savedVideos) {
       try {
-        return JSON.parse(savedVideos);
+        const parsedVideos = JSON.parse(savedVideos);
+        // Filter out sample video if present
+        return parsedVideos.filter(video => video.id !== 1);
       } catch (e) {
         console.error('Failed to parse videos from localStorage:', e);
       }
     }
-    // Default sample video if none found
-
+    // No default sample video
+    return [];
   });
 
   // Save videos to localStorage whenever they change
