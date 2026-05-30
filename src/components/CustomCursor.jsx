@@ -1,0 +1,59 @@
+import React, { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
+
+const CustomCursor = () => {
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [cursorVariant, setCursorVariant] = useState("default");
+
+  useEffect(() => {
+    const mouseMove = (e) => {
+      setMousePosition({
+        x: e.clientX,
+        y: e.clientY
+      });
+    };
+
+    window.addEventListener("mousemove", mouseMove);
+
+    return () => {
+      window.removeEventListener("mousemove", mouseMove);
+    };
+  }, []);
+
+  const variants = {
+    default: {
+      x: mousePosition.x - 16,
+      y: mousePosition.y - 16,
+      backgroundColor: "transparent",
+    },
+    text: {
+      height: 150,
+      width: 150,
+      x: mousePosition.x - 75,
+      y: mousePosition.y - 75,
+      backgroundColor: "rgba(124, 58, 237, 0.2)",
+      mixBlendMode: "difference"
+    }
+  };
+
+  return (
+    <>
+      <motion.div
+        className="fixed top-0 left-0 w-8 h-8 border-2 border-primary rounded-full pointer-events-none z-[9999] hidden md:block"
+        variants={variants}
+        animate={cursorVariant}
+        transition={{ type: "spring", stiffness: 500, damping: 28 }}
+      />
+      <motion.div
+        className="fixed top-0 left-0 w-2 h-2 bg-primary rounded-full pointer-events-none z-[9999] hidden md:block"
+        animate={{
+          x: mousePosition.x - 4,
+          y: mousePosition.y - 4,
+        }}
+        transition={{ type: "spring", stiffness: 1000, damping: 40 }}
+      />
+    </>
+  );
+};
+
+export default CustomCursor;
