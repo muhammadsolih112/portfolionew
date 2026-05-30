@@ -29,7 +29,8 @@ function App() {
       }
     }
     // Default sample video if none found
-   
+
+  });
 
   // Save videos to localStorage whenever they change
   useEffect(() => {
